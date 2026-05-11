@@ -29,8 +29,14 @@ ${code}
 
     res.json({ output });
 
-  } catch (err) {
-    console.error(err.response?.data || err.message);
-    res.status(500).json({ error: "Conversion failed" });
+  }catch (err) {
+
+    console.log("FULL ERROR:")
+    console.log(err.response?.data || err.message)
+  
+    res.status(500).json({
+      error: err.response?.data || err.message
+    })
+  
   }
 };
