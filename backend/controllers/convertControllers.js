@@ -13,13 +13,18 @@ exports.convertCode = async (req, res) => {
 
   }
 
-  const prompt = `
-Convert this code from ${fromLang} to ${toLang}.
-Return ONLY code.
-No explanation.
+  const prompt = `Convert the following ${fromLang} code into fully runnable ${toLang} code.
 
-${code}
-`;
+  Rules:
+  - Return ONLY code
+  - No explanations
+  - Include necessary imports
+  - Include main function if required
+  - Make the code complete and executable
+  
+  Code:
+  ${code}
+  `;
 
   try {
 
