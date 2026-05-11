@@ -106,6 +106,30 @@ const Main = () => {
           Convert
         </button>
 
+        <div className='flex justify-center mt-6 mb-4'>
+
+        <div className='
+          px-6 py-3
+          rounded-2xl
+          bg-white/10
+          backdrop-blur-md
+          border border-white/10
+          text-center
+          text-white/80
+        '>
+
+          <p className='text-sm font-medium'>
+            ConvertIT • Version 1.0 🚀
+          </p>
+
+          <p className='text-xs mt-1 text-white/50'>
+            Made by Raghav
+          </p>
+
+        </div>
+
+      </div>
+
       </div>
 
     </div>
