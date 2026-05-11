@@ -97,40 +97,71 @@ const Main = () => {
       </div>
 
       {/* BUTTON */}
-      <div className='flex justify-center mt-6'>
+<div className='flex justify-center mt-6'>
 
-        <button
-          onClick={handleConvert}
-          className='px-8 py-3 rounded-2xl bg-amber-500 text-white text-lg hover:bg-amber-600'
-        >
-          Convert
-        </button>
+  <button
+    onClick={handleConvert}
+    className='
+      px-8 py-3
+      rounded-2xl
+      bg-amber-500
+      text-white
+      text-lg
+      hover:bg-amber-600
+      transition-all duration-300
+    '
+  >
+    Convert
+  </button>
 
-        <div className='flex justify-center mt-6 mb-4'>
+</div>
 
-        <div className='
-          px-6 py-3
-          rounded-2xl
-          bg-white/10
-          backdrop-blur-md
-          border border-white/10
-          text-center
-          text-white/80
-        '>
+{/* FOOTER */}
+<div className='flex justify-center mt-6 '>
 
-          <p className='text-sm font-medium'>
-            ConvertIT • Version 1.0 🚀
-          </p>
+<div className='
+  fixed
+  bottom-4
+  right-4
+  px-5 py-2
+  rounded-xl
+  bg-white/10
+  backdrop-blur-md
+  border border-white/10
+  text-white/70
+  z-50
+  hover:bg-amber-600
+  transition-all duration-300
+  shadow-lg hover:scale-105
+'>
 
-          <p className='text-xs mt-1 text-white/50'>
-            Made by Raghav
-          </p>
+  <p>ConvertIT • v1.0.0 🚀</p>
 
-        </div>
+  <p className='text-white/40'>
 
-      </div>
+Made by{" "}
 
-      </div>
+<a
+  href="https://www.linkedin.com/in/raghav-saraswat/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className='
+    text-amber-400
+    font-semibold
+    hover:text-amber-300
+    transition-all duration-300
+  '
+>
+  Raghav 
+
+  <i className=" ml-1 pi pi-linkedin text-sm"></i>
+</a>
+
+</p>
+
+</div>
+
+</div>
 
     </div>
   )
