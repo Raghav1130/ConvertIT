@@ -4,6 +4,7 @@ import Input from './input'
 import Output from './output'
 import CodeInput from './codeinput'
 import CodeOutput from './codeoutput'
+import Loader from './loader'
 import Navbar from '../navbar/navbar'
 
 import "primereact/resources/themes/lara-light-blue/theme.css"
@@ -17,6 +18,7 @@ const Main = () => {
   const [output, setOutput] = useState("")
   const [fromLang, setFromLang] = useState("Python")
   const [toLang, setToLang] = useState("JavaScript")
+  const [loading, setLoading] = useState(false)
 
   // CONVERT FUNCTION
   const handleConvert = async () => {
@@ -29,23 +31,26 @@ const Main = () => {
       toLang
     })
 
+    setLoading(true)
+
     try {
 
-      const res = await fetch("https://convertit-1max.onrender.com/convert", {
+      const res = await fetch(
+        "https://convertit-1max.onrender.com/convert",
+        {
+          method: "POST",
 
-        method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          code,
-          fromLang,
-          toLang
-        })
-
-      })
+          body: JSON.stringify({
+            code,
+            fromLang,
+            toLang
+          })
+        }
+      )
 
       const data = await res.json()
 
@@ -57,6 +62,10 @@ const Main = () => {
 
       console.error("FRONTEND ERROR:", err)
 
+    } finally {
+
+      setLoading(false)
+
     }
   }
 
@@ -65,7 +74,7 @@ const Main = () => {
     <div className="min-h-screen overflow-hidden">
 
       {/* NAVBAR */}
-      <Navbar/>
+      <Navbar />
 
       {/* DROPDOWNS */}
       <div className='flex justify-center gap-10'>
@@ -83,85 +92,126 @@ const Main = () => {
       </div>
 
       {/* CODE BOXES */}
-      <div className='flex justify-center gap-10'>
+      {/* CODE BOXES */}
+<div className='flex justify-center gap-10'>
 
-        <CodeInput
-          code={code}
-          setCode={setCode}
-        />
+  <CodeInput
+    code={code}
+    setCode={setCode}
+  />
 
-        <CodeOutput
-          output={output}
-        />
+  {/* OUTPUT SIDE */}
+  <div className='relative'>
+
+    {/* OUTPUT BOX ALWAYS STAYS */}
+    <CodeOutput
+      output={output}
+    />
+
+    {/* LOADER OVERLAY */}
+    {
+      loading && (
+
+        <div
+          className='
+            absolute
+            inset-0
+            flex
+            items-center
+            justify-center
+            bg-black/100
+            rounded-xl
+            z-50
+            mt-10
+            h-113
+          '
+        >
+
+          <Loader />
+
+        </div>
+
+      )
+    }
+
+  </div>
+
+</div>
+
+      {/* BUTTON */}
+      <div className='flex justify-center mt-6'>
+
+        <button
+          onClick={handleConvert}
+          disabled={loading}
+          className='
+            px-8 py-3
+            rounded-2xl
+            bg-amber-500
+            text-white
+            text-lg
+            hover:bg-amber-600
+            transition-all duration-300
+            disabled:opacity-50
+            disabled:cursor-not-allowed
+          '
+        >
+          {
+            loading ? "Converting..." : "Convert"
+          }
+        </button>
 
       </div>
 
-      {/* BUTTON */}
-<div className='flex justify-center mt-6'>
+      {/* FOOTER */}
+      <div className='flex justify-center mt-6 '>
 
-  <button
-    onClick={handleConvert}
-    className='
-      px-8 py-3
-      rounded-2xl
-      bg-amber-500
-      text-white
-      text-lg
-      hover:bg-amber-600
-      transition-all duration-300
-    '
-  >
-    Convert
-  </button>
+        <div
+          className='
+            fixed
+            bottom-4
+            right-4
+            px-5 py-2
+            rounded-xl
+            bg-white/10
+            backdrop-blur-md
+            border border-white/10
+            text-white/70
+            z-50
+            hover:bg-amber-600
+            transition-all duration-300
+            shadow-lg hover:scale-105
+          '
+        >
 
-</div>
+          <p>ConvertIT • v1.0.0 🚀</p>
 
-{/* FOOTER */}
-<div className='flex justify-center mt-6 '>
+          <p className='text-white/40'>
 
-<div className='
-  fixed
-  bottom-4
-  right-4
-  px-5 py-2
-  rounded-xl
-  bg-white/10
-  backdrop-blur-md
-  border border-white/10
-  text-white/70
-  z-50
-  hover:bg-amber-600
-  transition-all duration-300
-  shadow-lg hover:scale-105
-'>
+            Made by{" "}
 
-  <p>ConvertIT • v1.0.0 🚀</p>
+            <a
+              href="https://www.linkedin.com/in/raghav-saraswat/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className='
+                text-amber-400
+                font-semibold
+                hover:text-amber-300
+                transition-all duration-300
+              '
+            >
+              Raghav
 
-  <p className='text-white/40'>
+              <i className="ml-1 pi pi-linkedin text-sm"></i>
 
-Made by{" "}
+            </a>
 
-<a
-  href="https://www.linkedin.com/in/raghav-saraswat/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className='
-    text-amber-400
-    font-semibold
-    hover:text-amber-300
-    transition-all duration-300
-  '
->
-  Raghav 
+          </p>
 
-  <i className=" ml-1 pi pi-linkedin text-sm"></i>
-</a>
+        </div>
 
-</p>
-
-</div>
-
-</div>
+      </div>
 
     </div>
   )
