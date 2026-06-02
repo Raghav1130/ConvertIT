@@ -189,7 +189,7 @@ const Main = () => {
           '
         >
 
-          <p>ConvertIT • v1.0.0 🚀</p>
+          <p>ConvertIT • v2.0.0 🚀</p>
 
           <p className='text-white/40'>
 
