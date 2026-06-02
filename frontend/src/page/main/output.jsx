@@ -8,7 +8,11 @@ const Output = ({ toLang, setToLang }) => {
     { name: 'C++' },
     { name: 'C#' },
     { name: 'Java' },
-    { name: 'JavaScript' }
+    { name: 'JavaScript' },
+    { name: 'Go' },
+    { name: 'Rust' },
+    { name: 'Kotlin' },
+    { name: 'Ruby' }
   ]
 
   return (
@@ -18,7 +22,7 @@ const Output = ({ toLang, setToLang }) => {
       optionLabel="name"
       placeholder="Output Language"
       onChange={(e) => setToLang(e.value.name)}
-      className="w-64 mt-10"
+      className="w-full max-w-xs mt-6 md:mt-10"
     />
   )
 }

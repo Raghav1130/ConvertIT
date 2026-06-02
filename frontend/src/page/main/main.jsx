@@ -23,6 +23,9 @@ const Main = () => {
   // CONVERT FUNCTION
   const handleConvert = async () => {
 
+    // Guard: do nothing if code input is empty
+    if (!code.trim()) return
+
     console.log("BUTTON CLICKED")
 
     console.log({
@@ -71,13 +74,13 @@ const Main = () => {
 
   return (
 
-    <div className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden px-4 md:px-8 pb-20">
 
       {/* NAVBAR */}
       <Navbar />
 
       {/* DROPDOWNS */}
-      <div className='flex justify-center gap-10'>
+      <div className='flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-10 mt-2'>
 
         <Input
           fromLang={fromLang}
@@ -91,59 +94,60 @@ const Main = () => {
 
       </div>
 
-      {/* CODE BOXES */}
-      {/* CODE BOXES */}
-<div className='flex justify-center gap-10'>
+      {/* CODE BOXES — stack vertically on mobile, side by side on md+ */}
+      <div className='flex flex-col md:flex-row justify-center gap-6 md:gap-10'>
 
-  <CodeInput
-    code={code}
-    setCode={setCode}
-  />
+        <CodeInput
+          code={code}
+          setCode={setCode}
+        />
 
-  {/* OUTPUT SIDE */}
-  <div className='relative'>
+        {/* OUTPUT SIDE */}
+        <div className='relative'>
 
-    {/* OUTPUT BOX ALWAYS STAYS */}
-    <CodeOutput
-      output={output}
-    />
+          {/* OUTPUT BOX ALWAYS STAYS */}
+          <CodeOutput
+            output={output}
+          />
 
-    {/* LOADER OVERLAY */}
-    {
-      loading && (
+          {/* LOADER OVERLAY */}
+          {
+            loading && (
 
-        <div
-          className='
-            absolute
-            inset-0
-            flex
-            items-center
-            justify-center
-            bg-black/100
-            rounded-xl
-            z-50
-            mt-10
-            h-113
-          '
-        >
+              <div
+                className='
+                  absolute
+                  inset-0
+                  flex
+                  items-center
+                  justify-center
+                  bg-black/100
+                  rounded-xl
+                  z-50
+                  mt-6
+                  md:mt-10
+                  h-[45vh]
+                  md:h-[60vh]
+                '
+              >
 
-          <Loader />
+                <Loader />
+
+              </div>
+
+            )
+          }
 
         </div>
 
-      )
-    }
-
-  </div>
-
-</div>
+      </div>
 
       {/* BUTTON */}
       <div className='flex justify-center mt-6'>
 
         <button
           onClick={handleConvert}
-          disabled={loading}
+          disabled={loading || !code.trim()}
           className='
             px-8 py-3
             rounded-2xl
@@ -181,6 +185,7 @@ const Main = () => {
             hover:bg-amber-600
             transition-all duration-300
             shadow-lg hover:scale-105
+            text-sm
           '
         >
 

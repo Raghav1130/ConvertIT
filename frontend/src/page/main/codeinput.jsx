@@ -8,11 +8,15 @@ const CodeInput = ({ code, setCode }) => {
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
+      className="w-full md:w-auto"
     >
-      <div className="flex mt-10">
+      <div className="flex mt-6 md:mt-10">
 
         <div className="
-          h-[60vh]
+          w-full
+          h-[45vh]
+          md:h-[60vh]
+          md:w-[40vw]
           bg-black/30
           backdrop-blur-md
           border border-white/20
@@ -27,7 +31,7 @@ const CodeInput = ({ code, setCode }) => {
             placeholder="Paste your code here..."
             spellCheck={false}
             className="
-              w-[40vw]
+              w-full
               h-full
               bg-transparent
               outline-none
